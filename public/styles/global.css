@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
 
 html,
 body {
@@ -8,6 +9,20 @@ body {
   color: #222;
   font-weight: 200;
   height: 100%;
+}
+
+h1{
+  font-family: 'Concert One', cursive;
+  background-color: #fff;
+  color: #222;
+  font-weight: 200;
+  height: 100%;
+}
+
+li {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
 }
 
 #__next {

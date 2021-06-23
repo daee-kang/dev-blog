@@ -1,32 +1,64 @@
+import { GetStaticProps } from "next";
 import Layout from "../components/Layout";
 import BasicMeta from "../components/meta/BasicMeta";
 import OpenGraphMeta from "../components/meta/OpenGraphMeta";
 import TwitterCardMeta from "../components/meta/TwitterCardMeta";
 import { SocialList } from "../components/SocialList";
+import config from "../lib/config";
+import { listPostContent, PostContent } from "../lib/posts";
+import PostItem from "../components/PostItem";
+import { listTags } from "../lib/tags";
 
-export default function Index() {
+type Props = {
+  posts: PostContent[]
+};
+export default function Index({ posts }: Props) {
   return (
-    <Layout>
+    <Layout noNav>
       <BasicMeta url={"/"} />
       <OpenGraphMeta url={"/"} />
       <TwitterCardMeta url={"/"} />
-      <div className="container">
-        <div>
-          <h1>
-            Hi, We're Next.js & Netlify<span className="fancy">.</span>
-          </h1>
-          <span className="handle">@nextjs-netlify-blog</span>
-          <h2>A blog template with Next.js and Netlify.</h2>
-          <SocialList />
+      <div className="flexContainer">
+
+        <div className="container" style={{ flex: 1 }}>
+          <div>
+            <h1>
+              dev blog<span className="fancy">.</span>
+            </h1>
+            <span className="handle">@daee-kang</span>
+            <SocialList />
+          </div>
         </div>
+
+        <div className="container" style={{ flex: 3 }}>
+          <div>
+            recent posts by me :-)
+            <div>
+              {posts.map((post, i) => (
+                <li key={i}>
+                  <PostItem post={post} />
+                </li>
+              ))}
+            </div>
+          </div>
+        </div>
+
       </div>
+
       <style jsx>{`
         .container {
           display: flex;
           align-items: center;
           justify-content: center;
-          flex: 1 1 auto;
-          padding: 0 1.5rem;
+          padding: 1.5rem;
+        }
+        .flexContainer {
+          width: 850px;
+          margin: auto;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
         }
         h1 {
           font-size: 2.5rem;
@@ -39,11 +71,13 @@ export default function Index() {
           line-height: 1.25;
         }
         .fancy {
-          color: #15847d;
+          color: #219ebc;
         }
         .handle {
+          font-family: 'Concert One', cursive;
           display: inline-block;
-          margin-top: 0.275em;
+          margin-top: -5em;
+          margin-bottom: 2em;
           color: #9b9b9b;
           letter-spacing: 0.05em;
         }
@@ -59,4 +93,14 @@ export default function Index() {
       `}</style>
     </Layout>
   );
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = listPostContent(1, config.posts_per_page);
+
+  return {
+    props: {
+      posts
+    },
+  };
 }
