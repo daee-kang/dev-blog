@@ -8,6 +8,8 @@ import config from "../lib/config";
 import { listPostContent, PostContent } from "../lib/posts";
 import PostItem from "../components/PostItem";
 import { listTags } from "../lib/tags";
+import { ParticleBG } from "../components/ParticleBG";
+import Link from "next/link";
 
 type Props = {
   posts: PostContent[]
@@ -18,11 +20,14 @@ export default function Index({ posts }: Props) {
       <BasicMeta url={"/"} />
       <OpenGraphMeta url={"/"} />
       <TwitterCardMeta url={"/"} />
-      <div className="flexContainer">
+      <div style={{ position: 'fixed', width: '100vw', height: '100vh' }}>
+        <ParticleBG />
+      </div>
 
-        <div className="container" style={{ flex: 1 }}>
+      <div className="flexContainer">
+        <div className="container boxed" style={{ flex: 1 }}>
           <div>
-            <h1>
+            <h1 style={{ fontSize: '5rem' }}>
               dev blog<span className="fancy">.</span>
             </h1>
             <span className="handle">@daee-kang</span>
@@ -32,7 +37,9 @@ export default function Index({ posts }: Props) {
 
         <div className="container" style={{ flex: 3 }}>
           <div>
-            recent posts by me :-)
+            <h1 className="articleTitle">
+              my recent posts:
+            </h1>
             <div>
               {posts.map((post, i) => (
                 <li key={i}>
@@ -40,6 +47,11 @@ export default function Index({ posts }: Props) {
                 </li>
               ))}
             </div>
+            <Link href={"/posts"}>
+              <h1 className="more">
+                view all
+              </h1>
+            </Link>
           </div>
         </div>
 
@@ -53,12 +65,29 @@ export default function Index({ posts }: Props) {
           padding: 1.5rem;
         }
         .flexContainer {
-          width: 850px;
+          width: 1000px;
           margin: auto;
           display: flex;
           flex-direction: row;
           align-items: center;
           justify-content: center;
+          z-index: 100;
+        }
+        .articleTitle {
+          font-size: 2.5rem;
+          width: 100%;
+          padding: 0 0 0 20px;
+        }
+        .more {
+          font-size: 1.5rem;
+          text-align: right;
+          color: #219ebc;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+        .boxed {
+          border: 1px solid black;
+          background-color: #f8f8f8;
         }
         h1 {
           font-size: 2.5rem;

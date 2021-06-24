@@ -16,16 +16,17 @@ export default function PostItem({ post }: Props) {
         <style jsx>
           {`
             a {
+              background-color: #fff;
               color: #222;
               display: inline-block;
               padding: 1.5em;
+              border-radius: .5em;
               margin: .5em;
-              border-radius: 1em;
               width: 100%;
-              -webkit-box-shadow: -2px 2px 19px -2px rgba(0,0,0,0.15);
-              -moz-box-shadow: -2px 2px 19px -2px rgba(0,0,0,0.15);
-              box-shadow: -2px 2px 19px -2px rgba(0,0,0,0.15);
-              transition: all .2s ease-in-out;
+              -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.21);
+              -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.21);
+              box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.21);
+              transition: all .2s ease;
               position: relative;
             }
 
