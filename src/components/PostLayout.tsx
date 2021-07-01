@@ -12,6 +12,8 @@ import { SocialList } from "./SocialList";
 import TagButton from "./TagButton";
 import { getAuthor } from "../lib/authors";
 import { getTag } from "../lib/tags";
+import { useRouter } from 'next/router'
+import Link from "next/link";
 
 type Props = {
   title: string;
@@ -33,6 +35,7 @@ export default function PostLayout({
 }: Props) {
   const keywords = tags.map(it => getTag(it).name);
   const authorName = getAuthor(author).name;
+  const router = useRouter();
   return (
     <Layout>
       <BasicMeta
@@ -62,6 +65,15 @@ export default function PostLayout({
       <div className={"container"}>
         <article>
           <header>
+            <div className="post-nav">
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+              /
+              <Link href="/posts">
+                <a>Posts</a>
+              </Link>
+            </div>
             <h1 className="title">{title}</h1>
             <div className={"metadata"}>
               <div>
@@ -137,6 +149,16 @@ export default function PostLayout({
             .social-list {
               margin-top: 3rem;
               text-align: center;
+            }
+            .post-nav {
+              font-size: 1rem;
+              margin-bottom: 10px;
+            }
+            .post-nav a {
+              text-align: center;
+              color: #fca311;
+              padding: 0px 20px;
+              text-decoration: underline;
             }
 
             @media (min-width: 769px) {
