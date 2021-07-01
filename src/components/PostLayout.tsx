@@ -62,7 +62,7 @@ export default function PostLayout({
       <div className={"container"}>
         <article>
           <header>
-            <h1>{title}</h1>
+            <h1 className="title">{title}</h1>
             <div className={"metadata"}>
               <div>
                 <Date date={date} />
@@ -100,6 +100,14 @@ export default function PostLayout({
               box-sizing: border-box;
               z-index: 0;
             }
+            header {
+              margin: 0 -25px;
+              padding: 30px;
+              background: #023047;
+              border-radius: 0 0 25px 25px;
+              -webkit-box-shadow: 2px 4px 5px -1px rgba(0,0,0,0.42); 
+              box-shadow: 2px 4px 5px -1px rgba(0,0,0,0.42);
+            }
             .metadata div {
               display: inline-block;
               margin-right: 0.5rem;
@@ -110,6 +118,10 @@ export default function PostLayout({
             h1 {
               margin: 0 0 0.5rem;
               font-size: 2.5rem;
+            }
+            .title {
+              color: #e5e5e5;
+              text-shadow: 3px 2px 2px #e03a3a;
             }
             .tag-list {
               list-style: none;
@@ -186,9 +198,20 @@ export default function PostLayout({
             margin: 10px -15px;
             border-radius: 10px;
             overflow: auto;
-            background: #222831;
+            background: #272f3c;
             -webkit-box-shadow: 2px 4px 5px -1px rgba(0,0,0,0.42); 
             box-shadow: 2px 4px 5px -1px rgba(0,0,0,0.42);
+          }
+          @media (max-width: 770px) {
+            pre[class*="language-"] {
+            padding: 2em;
+            margin: 10px -30px;
+            border-radius: 0px;
+            overflow: auto;
+            background: #272f3c;
+            -webkit-box-shadow: 0; 
+            box-shadow: 0;
+          }
           }
           :not(pre) > code[class*="language-"] {
             padding: .1em .3em;
@@ -234,7 +257,6 @@ export default function PostLayout({
           .language-css .token.string,
           .style .token.string {
             color: #ffffff;
-            background: #222831;
           }
           .token.atrule,
           .token.attr-value,

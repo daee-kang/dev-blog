@@ -16,7 +16,7 @@ type Props = {
 };
 export default function Index({ posts }: Props) {
   return (
-    <Layout noNav>
+    <Layout>
       <BasicMeta url={"/"} />
       <OpenGraphMeta url={"/"} />
       <TwitterCardMeta url={"/"} />

@@ -3,9 +3,8 @@ import Navigation from "./Navigation";
 
 type Props = {
   children: React.ReactNode;
-  noNav?: boolean
 };
-export default function Layout({ children, noNav = false }: Props) {
+export default function Layout({ children }: Props) {
   return (
     <div className="root">
       <Head>
@@ -15,10 +14,6 @@ export default function Layout({ children, noNav = false }: Props) {
         <link rel="apple-touch-icon" href="/icon.png" />
         <meta name="theme-color" content="#fff" />
       </Head>
-      {!noNav && <nav>
-        <Navigation />
-      </nav>
-      }
       <main>{children}</main>
       <style jsx>
         {`
