@@ -121,7 +121,8 @@ export default function PostLayout({
             }
             .title {
               color: #e5e5e5;
-              text-shadow: 3px 2px 2px #e03a3a;
+              text-shadow: 2px 2px 2px #e03a3a;
+              font-style: italic;
             }
             .tag-list {
               list-style: none;
