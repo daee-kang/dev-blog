@@ -11,3 +11,7 @@ tags:
     name: mdx
   - slug: markdown
     name: markdown
+  - slug: nextjs
+    name: next.js
+  - slug: jamstack
+    name: jamstack
