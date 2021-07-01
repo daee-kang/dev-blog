@@ -22,7 +22,7 @@ export const ParticleBG = () => {
         fpsLimit: 60,
         particles: {
           color: {
-            value: "#f15167",
+            value: "#ffafcc",
           },
           number: {
             value: 100,

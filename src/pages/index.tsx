@@ -25,7 +25,7 @@ export default function Index({ posts }: Props) {
       </div>
 
       <div className="flexContainer">
-        <div className="container boxed" style={{ flex: 1 }}>
+        <div className="container boxed left-flex">
           <div>
             <h1 style={{ fontSize: '5rem' }}>
               dev blog<span className="fancy">.</span>
@@ -35,10 +35,10 @@ export default function Index({ posts }: Props) {
           </div>
         </div>
 
-        <div className="container" style={{ flex: 3 }}>
+        <div className="container right-flex">
           <div>
             <h1 className="articleTitle">
-              my recent posts:
+              my recent posts ↴
             </h1>
             <div>
               {posts.map((post, i) => (
@@ -62,7 +62,7 @@ export default function Index({ posts }: Props) {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 1.5rem;
+          margin: 1.5rem;
         }
         .flexContainer {
           width: 1000px;
@@ -87,7 +87,8 @@ export default function Index({ posts }: Props) {
         }
         .boxed {
           border: 1px solid black;
-          background-color: #f8f8f8;
+          background-color: #ffffff;
+          padding: 2rem;
         }
         h1 {
           font-size: 2.5rem;
@@ -110,13 +111,32 @@ export default function Index({ posts }: Props) {
           color: #9b9b9b;
           letter-spacing: 0.05em;
         }
+        .left-flex {
+          flex: 1;
+        }
+        .right-flex{
+          flex: 3;
+        }
 
-        @media (min-width: 769px) {
-          h1 {
-            font-size: 3rem;
+        @media (max-width: 1000px) {
+          .flexContainer {
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
           }
-          h2 {
-            font-size: 2.25rem;
+          .left-flex {
+            flex: 1;
+          }
+          .right-flex{
+            flex: 1;
+          }
+          .articleTitle {
+            font-size: 2rem;
+            width: 100%;
+            padding: 0 0 0 20px;
           }
         }
       `}</style>

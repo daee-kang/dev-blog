@@ -31,7 +31,7 @@ export default function Layout({ children, noNav = false }: Props) {
             display: flex;
             min-height: 100%;
           }
-          @media (min-width: 769px) {
+          @media (min-width: 1000px) {
             .root {
               display: flex;
               flex: 1 0 auto;
