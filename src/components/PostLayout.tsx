@@ -71,15 +71,16 @@ export default function PostLayout({
                 <Author author={getAuthor(author)} />
               </div>
             </div>
+            <ul className={"tag-list"}>
+              {tags.map((it, i) => (
+                <li key={i}>
+                  <TagButton tag={getTag(it)} />
+                </li>
+              ))}
+            </ul>
           </header>
           <div className={styles.content}>{children}</div>
-          <ul className={"tag-list"}>
-            {tags.map((it, i) => (
-              <li key={i}>
-                <TagButton tag={getTag(it)} />
-              </li>
-            ))}
-          </ul>
+
         </article>
         <footer>
           <div className={"social-list"}>
@@ -92,7 +93,7 @@ export default function PostLayout({
         {`
             .container {
               display: block;
-              max-width: 36rem;
+              max-width: 50rem;
               width: 100%;
               margin: 0 auto;
               padding: 0 1.5rem;
@@ -108,12 +109,12 @@ export default function PostLayout({
             }
             h1 {
               margin: 0 0 0.5rem;
-              font-size: 2.25rem;
+              font-size: 2.5rem;
             }
             .tag-list {
               list-style: none;
-              text-align: right;
-              margin: 1.75rem 0 0 0;
+              text-align: left;
+              margin: 1rem 0 0 0;
               padding: 0;
             }
             .tag-list li {
@@ -136,100 +137,190 @@ export default function PostLayout({
       <style global jsx>
         {`
             /* Syntax highlighting */
+            code[class*="language-"],
+            pre[class*="language-"] {
+              -moz-tab-size: 2;
+              -o-tab-size: 2;
+              tab-size: 2;
+              -webkit-hyphens: none;
+              -moz-hyphens: none;
+              -ms-hyphens: none;
+              hyphens: none;
+              white-space: pre;
+              white-space: pre-wrap;
+              word-wrap: normal;
+              font-family: Recursive, 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+              font-size: 16px;
+              line-height: 1.375;
+              color: #76d9e6;
+              text-shadow: none;
+            }
+
+            pre > code[class*="language-"] {
+              font-size: 1em;
+            }
+
+            pre[class*="language-"],
+            :not(pre) > code[class*="language-"] {
+              background: #2a2a2a;
+            }
+
+            pre[class*="language-"] {
+              padding: 15px;
+              border-radius: 4px;
+              border: 1px solid #e1e1e8;
+              overflow: auto;
+              position: relative;
+            }
+
+            pre[class*="language-"] code {
+              white-space: pre;
+              display: block;
+            }
+
+            :not(pre) > code[class*="language-"] {
+              padding: 0.15em 0.2em 0.05em;
+              border-radius: .3em;
+              border: 0.13em solid #7a6652;
+              box-shadow: 1px 1px 0.3em -0.1em #000 inset;
+            }
+
+            .token.namespace {
+              opacity: .7;
+            }
+
             .token.comment,
             .token.prolog,
             .token.doctype,
-            .token.cdata,
-            .token.plain-text {
-              color: #6a737d;
+            .token.cdata {
+              color: #6f705e;
+            }
+
+            .token.operator,
+            .token.boolean,
+            .token.number {
+              color: #a77afe;
+            }
+
+            .token.attr-name,
+            .token.string {
+              color: #e6d06c;
+            }
+
+            .token.entity,
+            .token.url,
+            .language-css .token.string,
+            .style .token.string {
+              color: #e6d06c;
+            }
+
+            .token.selector,
+            .token.inserted {
+              color: #a6e22d;
             }
 
             .token.atrule,
             .token.attr-value,
             .token.keyword,
-            .token.operator {
-              color: #d73a49;
-            }
-
-            .token.property,
-            .token.tag,
-            .token.boolean,
-            .token.number,
-            .token.constant,
-            .token.symbol,
+            .token.important,
             .token.deleted {
-              color: #22863a;
+              color: #ef3b7d;
             }
 
-            .token.selector,
-            .token.attr-name,
-            .token.string,
-            .token.char,
-            .token.builtin,
-            .token.inserted {
-              color: #032f62;
+            .token.regex,
+            .token.statement {
+              color: #76d9e6;
             }
 
-            .token.function,
-            .token.class-name {
-              color: #6f42c1;
+            .token.placeholder,
+            .token.variable {
+              color: #fff;
             }
 
-            /* language-specific */
-
-            /* JSX */
-            .language-jsx .token.punctuation,
-            .language-jsx .token.tag .token.punctuation,
-            .language-jsx .token.tag .token.script,
-            .language-jsx .token.plain-text {
-              color: #24292e;
+            .token.important,
+            .token.statement,
+            .token.bold {
+              font-weight: bold;
             }
 
-            .language-jsx .token.tag .token.attr-name {
-              color: #6f42c1;
+            .token.punctuation {
+              color: #bebec5;
             }
 
-            .language-jsx .token.tag .token.class-name {
-              color: #005cc5;
+            .token.entity {
+              cursor: help;
             }
 
-            .language-jsx .token.tag .token.script-punctuation,
-            .language-jsx .token.attr-value .token.punctuation:first-child {
-              color: #d73a49;
+            .token.italic {
+              font-style: italic;
             }
 
-            .language-jsx .token.attr-value {
-              color: #032f62;
+            code.language-markup {
+              color: #f9f9f9;
             }
 
-            .language-jsx span[class="comment"] {
-              color: pink;
+            code.language-markup .token.tag {
+              color: #ef3b7d;
             }
 
-            /* HTML */
-            .language-html .token.tag .token.punctuation {
-              color: #24292e;
+            code.language-markup .token.attr-name {
+              color: #a6e22d;
             }
 
-            .language-html .token.tag .token.attr-name {
-              color: #6f42c1;
+            code.language-markup .token.attr-value {
+              color: #e6d06c;
             }
 
-            .language-html .token.tag .token.attr-value,
-            .language-html
-              .token.tag
-              .token.attr-value
-              .token.punctuation:not(:first-child) {
-              color: #032f62;
+            code.language-markup .token.style,
+            code.language-markup .token.script {
+              color: #76d9e6;
             }
 
-            /* CSS */
-            .language-css .token.selector {
-              color: #6f42c1;
+            code.language-markup .token.script .token.keyword {
+              color: #76d9e6;
             }
 
-            .language-css .token.property {
-              color: #005cc5;
+            /* Line highlight plugin */
+            pre[class*="language-"][data-line] {
+              position: relative;
+              padding: 1em 0 1em 3em;
+            }
+
+            pre[data-line] .line-highlight {
+              position: absolute;
+              left: 0;
+              right: 0;
+              padding: 0;
+              margin-top: 1em;
+              background: rgba(255, 255, 255, 0.08);
+              pointer-events: none;
+              line-height: inherit;
+              white-space: pre;
+            }
+
+            pre[data-line] .line-highlight:before,
+            pre[data-line] .line-highlight[data-end]:after {
+              content: attr(data-start);
+              position: absolute;
+              top: .4em;
+              left: .6em;
+              min-width: 1em;
+              padding: 0.2em 0.5em;
+              background-color: rgba(255, 255, 255, 0.4);
+              color: black;
+              font: bold 65%/1 sans-serif;
+              height: 1em;
+              line-height: 1em;
+              text-align: center;
+              border-radius: 999px;
+              text-shadow: none;
+              box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+            }
+
+            pre[data-line] .line-highlight[data-end]:after {
+              content: attr(data-end);
+              top: auto;
+              bottom: .4em;
             }
           `}
       </style>

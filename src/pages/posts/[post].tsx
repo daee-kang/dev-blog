@@ -2,6 +2,7 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import renderToString from "next-mdx-remote/render-to-string";
 import { MdxRemote } from "next-mdx-remote/types";
 import hydrate from "next-mdx-remote/hydrate";
+import rehypePrism from "@mapbox/rehype-prism"
 import matter from "gray-matter";
 import { fetchPostContent } from "../../lib/posts";
 import fs from "fs";
@@ -68,7 +69,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { content, data } = matter(source, {
     engines: { yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object }
   });
-  const mdxSource = await renderToString(content, { components, scope: data });
+  const mdxSource = await renderToString(content, {
+    components,
+    scope: data,
+    mdxOptions: {
+      rehypePlugins: [[rehypePrism, {}]]
+    }
+  });
   return {
     props: {
       title: data.title,
