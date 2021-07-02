@@ -10,9 +10,11 @@ import PostItem from "../components/PostItem";
 import { listTags } from "../lib/tags";
 import { ParticleBG } from "../components/ParticleBG";
 import Link from "next/link";
+import Image from 'next/image';
+import ThisIsMe from '../../public/images/me.png';
 
 type Props = {
-  posts: PostContent[]
+  posts: PostContent[];
 };
 export default function Index({ posts }: Props) {
   return (
@@ -27,7 +29,8 @@ export default function Index({ posts }: Props) {
       <div className="flexContainer">
         <div className="container boxed left-flex">
           <div>
-            <h1 style={{ fontSize: '5rem' }}>
+            <Image src={ThisIsMe} />
+            <h1 className="site-title">
               dev blog<span className="fancy">.</span>
             </h1>
             <span className="handle">@daee-kang</span>
@@ -65,7 +68,7 @@ export default function Index({ posts }: Props) {
           margin: 1.5rem;
         }
         .flexContainer {
-          width: 1000px;
+          width: 1200px;
           margin: auto;
           display: flex;
           flex-direction: row;
@@ -100,6 +103,9 @@ export default function Index({ posts }: Props) {
           font-weight: 400;
           line-height: 1.25;
         }
+        .site-title {
+          font-size: 5rem;
+        }
         .fancy {
           color: #219ebc;
         }
@@ -112,13 +118,16 @@ export default function Index({ posts }: Props) {
           letter-spacing: 0.05em;
         }
         .left-flex {
-          flex: 1;
+          flex: 2;
         }
         .right-flex{
           flex: 3;
         }
 
-        @media (max-width: 1000px) {
+        @media (max-width: 1200px) {
+          .container {
+            margin: 1rem;
+          }
           .flexContainer {
             margin: 20px auto;
             display: flex;
@@ -129,6 +138,7 @@ export default function Index({ posts }: Props) {
           }
           .left-flex {
             flex: 1;
+            width: 80vw;
           }
           .right-flex{
             flex: 1;
@@ -137,6 +147,9 @@ export default function Index({ posts }: Props) {
             font-size: 2rem;
             width: 100%;
             padding: 0 0 0 20px;
+          }
+          .site-title {
+            font-size: 3rem;
           }
         }
       `}</style>
@@ -152,4 +165,4 @@ export const getStaticProps: GetStaticProps = async () => {
       posts
     },
   };
-}
+};
