@@ -1,5 +1,9 @@
 module.exports = ({
   pageExtensions: ["tsx"],
+  images: {
+    loader: "imgix",
+    path: "",
+  },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.module.rules.push(
       ...[
