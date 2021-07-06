@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../public/styles/content.module.css";
 import Author from "./Author";
 import Copyright from "./Copyright";
@@ -14,6 +14,7 @@ import { getAuthor } from "../lib/authors";
 import { getTag } from "../lib/tags";
 import { useRouter } from 'next/router'
 import Link from "next/link";
+import { useRef } from "react";
 
 type Props = {
   title: string;
@@ -35,7 +36,27 @@ export default function PostLayout({
 }: Props) {
   const keywords = tags.map(it => getTag(it).name);
   const authorName = getAuthor(author).name;
-  const router = useRouter();
+
+  const titleRef = useRef(null);
+  const [isTitleVisible, setIsTitleVisible] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+      const [entry] = entries;
+      setIsTitleVisible(entry.isIntersecting);
+    }, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 1.0
+    });
+
+    if (titleRef.current) observer.observe(titleRef.current);
+
+    return () => {
+      if (titleRef.current) observer.unobserve(titleRef.current);
+    }
+  }, [titleRef])
+
   return (
     <Layout>
       <BasicMeta
@@ -83,7 +104,7 @@ export default function PostLayout({
                 <Author author={getAuthor(author)} />
               </div>
             </div>
-            <ul className={"tag-list"}>
+            <ul className={"tag-list"} ref={titleRef}>
               {tags.map((it, i) => (
                 <li key={i}>
                   <TagButton tag={getTag(it)} />
@@ -100,6 +121,9 @@ export default function PostLayout({
           </div>
           <Copyright />
         </footer>
+        <button className={`jumpback ${!isTitleVisible ? 'visible' : 'invisible'}`} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          ☝
+        </button>
       </div>
       <style jsx>
         {`
@@ -159,6 +183,38 @@ export default function PostLayout({
               color: #fca311;
               padding: 0px 20px;
               text-decoration: underline;
+            }
+
+            .jumpback {
+              position: fixed;
+              background-color: #fff;
+              top: 30px;
+              right: 30px;
+              height: 100px;
+              border-radius: 30px;
+              width: 60px;
+              font-size: 2rem;
+              border: none;
+              -webkit-box-shadow: 0px 2px 7px -2px rgba(0,0,0,0.51);
+              -moz-box-shadow: 0px 2px 7px -2px rgba(0,0,0,0.51);
+              box-shadow: 0px 2px 7px -2px rgba(0,0,0,0.51);
+              transition:all 0.2s ease-in-out;
+              z-index: 100;
+            }
+            .jumpback:hover {
+              -webkit-box-shadow: 0px 2px 12px -2px rgba(0,0,0,0.51);
+              -moz-box-shadow: 0px 2px 12px -2px rgba(0,0,0,0.51);
+              box-shadow: 0px 2px 12px -2px rgba(0,0,0,0.51);
+            }
+            .visible {
+              display: block;
+              opacity: 100%;
+              bottom: 30px;
+            }
+            .invisible {
+              opacity: 0%;
+              display: hidden;
+              bottom: -30px;
             }
 
             @media (min-width: 769px) {
