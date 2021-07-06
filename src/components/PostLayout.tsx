@@ -188,7 +188,6 @@ export default function PostLayout({
             .jumpback {
               position: fixed;
               background-color: #fff;
-              top: 30px;
               right: 30px;
               height: 100px;
               border-radius: 30px;

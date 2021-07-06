@@ -1,19 +1,19 @@
 {
-  "base_url": "https://wutali-nextjs-netlify-blog.netlify.app",
-  "site_title": "Next.js Netlify Blog",
-  "site_description": "Next.js blog template for Netlify",
+  "base_url": "https://daeedev.netlify.app",
+  "site_title": "daees dev blog",
+  "site_description": "A development blog by Daee Kang",
   "site_keywords": [
     {
-      "keyword": "Next.js"
+      "keyword": "development"
     },
     {
-      "keyword": "Netlify"
+      "keyword": "programming"
     },
     {
-      "keyword": "React"
+      "keyword": "blog"
     }
   ],
   "posts_per_page": 5,
   "twitter_account": "@my-account",
-  "github_account": "wutali"
+  "github_account": "daee-kang"
 }
