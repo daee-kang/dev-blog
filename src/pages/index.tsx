@@ -124,7 +124,7 @@ export default function Index({ posts }: Props) {
           flex: 3;
         }
 
-        @media (max-width: 1200px) {
+        @media (max-width: 700px) {
           .container {
             margin: 1rem;
           }
@@ -138,7 +138,6 @@ export default function Index({ posts }: Props) {
           }
           .left-flex {
             flex: 1;
-            width: 80vw;
           }
           .right-flex{
             flex: 1;
