@@ -4,6 +4,8 @@ import PostItem from "./PostItem";
 import TagLink from "./TagLink";
 import Pagination from "./Pagination";
 import { TagContent } from "../lib/tags";
+import TagButton from "./TagButton";
+import Link from "next/link";
 
 type Props = {
   posts: PostContent[];
@@ -16,6 +18,24 @@ type Props = {
 export default function PostList({ posts, tags, pagination }: Props) {
   return (
     <div className={"container"}>
+      <div className="nav">
+        <Link href="/">
+          <a>Home</a>
+        </Link>
+      </div>
+      <div>
+        <h2>
+          so these are all my posts
+        </h2>
+      </div>
+      and here are some categories:
+      <ul className={"tag-list"}>
+        {tags.map((it, i) => (
+          <li key={i}>
+            <TagButton tag={it} />
+          </li>
+        ))}
+      </ul>
       <div className={"posts"}>
         <ul className={"post-list"}>
           {posts.map((it, i) => (
@@ -33,16 +53,10 @@ export default function PostList({ posts, tags, pagination }: Props) {
           }}
         />
       </div>
-      <ul className={"categories"}>
-        {tags.map((it, i) => (
-          <li key={i}>
-            <TagLink tag={it} />
-          </li>
-        ))}
-      </ul>
       <style jsx>{`
         .container {
           display: flex;
+          flex-direction: column;
           margin: 0 auto;
           max-width: 1200px;
           width: 100%;
@@ -53,24 +67,35 @@ export default function PostList({ posts, tags, pagination }: Props) {
           padding: 0;
         }
         li {
-          list-style: none;
+          margin: 5px;
         }
         .posts {
           display: flex;
           flex-direction: column;
           flex: 1 1 auto;
         }
-        .posts li {
-          margin-bottom: 1.5rem;
-        }
         .post-list {
           flex: 1 0 auto;
         }
-        .categories {
-          display: none;
+        .tag-list {
+          list-style: none;
+          text-align: left;
+          margin: 1rem 0 0 0;
+          padding: 0;
         }
-        .categories li {
-          margin-bottom: 0.75em;
+        .tag-list li {
+          display: inline-block;
+          margin-left: 0.5rem;
+        }
+        .nav {
+          font-size: 1rem;
+          margin-top: 10px;
+        }
+        .nav a {
+          text-align: center;
+          color: #fca311;
+          padding: 0px 20px;
+          text-decoration: underline;
         }
 
         @media (min-width: 769px) {

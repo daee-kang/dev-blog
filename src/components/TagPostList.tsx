@@ -3,6 +3,7 @@ import { PostContent } from "../lib/posts";
 import { TagContent } from "../lib/tags";
 import PostItem from "./PostItem";
 import Pagination from "./Pagination";
+import Link from "next/link";
 
 type Props = {
   posts: PostContent[];
@@ -15,9 +16,18 @@ type Props = {
 export default function TagPostList({ posts, tag, pagination }: Props) {
   return (
     <div className={"container"}>
-      <h1>
-        All posts / <span>{tag.name}</span>
-      </h1>
+      <div className="nav">
+        <Link href="/">
+          <a>Home</a>
+        </Link>
+        /
+        <Link href="/posts">
+          <a>Posts</a>
+        </Link>
+      </div>
+      <h2>
+        <Link href="/posts">All posts</Link> / <span style={{ color: '#e03a3a' }}>{tag.name}</span>
+      </h2>
       <ul>
         {posts.map((it, i) => (
           <li key={i}>
@@ -65,6 +75,16 @@ export default function TagPostList({ posts, tag, pagination }: Props) {
           li {
             list-style: none;
             margin-bottom: 1.5rem;
+          }
+          .nav {
+          font-size: 1rem;
+          margin-top: 10px;
+          }
+          .nav a {
+            text-align: center;
+            color: #fca311;
+            padding: 0px 20px;
+            text-decoration: underline;
           }
 
           @media (min-width: 769px) {
