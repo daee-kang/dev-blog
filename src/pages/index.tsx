@@ -29,7 +29,7 @@ export default function Index({ posts }: Props) {
       <div className="flexContainer">
         <div className="container boxed left-flex">
           <div>
-            <Image src={ThisIsMe} />
+            <Image src={ThisIsMe} placeholder={`blur`} />
             <h1 className="site-title">
               dev blog<span className="fancy">.</span>
             </h1>
