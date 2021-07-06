@@ -187,12 +187,15 @@ export default function PostLayout({
 
             .jumpback {
               position: fixed;
+              display: flex;
+              align-items: center;
+              justify-content: center;
               background-color: #fff;
               right: 30px;
               height: 100px;
               border-radius: 30px;
               width: 60px;
-              font-size: 2rem;
+              font-size: 30px;
               border: none;
               -webkit-box-shadow: 0px 2px 7px -2px rgba(0,0,0,0.51);
               -moz-box-shadow: 0px 2px 7px -2px rgba(0,0,0,0.51);
@@ -207,7 +210,7 @@ export default function PostLayout({
               box-shadow: 0px 2px 12px -2px rgba(0,0,0,0.51);
             }
             .visible {
-              display: block;
+              display: flex;
               opacity: 100%;
               bottom: 30px;
             }
