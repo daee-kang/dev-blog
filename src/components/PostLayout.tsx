@@ -137,7 +137,7 @@ export default function PostLayout({
               z-index: 0;
             }
             header {
-              margin: 0 -25px;
+              margin: 0 -23px;
               padding: 30px;
               background: #023047;
               border-radius: 0 0 25px 25px;
