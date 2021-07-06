@@ -126,7 +126,7 @@ export default function Index({ posts }: Props) {
 
         @media (max-width: 700px) {
           .container {
-            margin: 1rem;
+            margin: 1.5rem;
           }
           .flexContainer {
             margin: 20px auto;
