@@ -7,6 +7,8 @@ This is a dev blog that I made with Next.js and is hosted on netlify for CI and 
 
 I wanted to learn server side rendering and Next.js is the new hot thing so here it is 🤠
 
+I mean look how fast this thing is 
+
 ### Visit it [here](https://daeedev.netlify.app)
 
 ![](https://github.com/daee-kang/dev-blog/blob/master/demo.gif)
