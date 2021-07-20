@@ -13,8 +13,6 @@ I've made a site similar to this in the past where I would just record my develo
 
 I've come across a few blogs like this and now I want to have my own blog, to help me journal my own progress and maybe some people will see it too. 
 
-# Next.js
-
 The previous site I mentioned earlier that I had made was made with simple React, but it had it's own database running, specifically using Mongo Atlas. Looking back, yeah that was overkill. But it was a great learning experience and I loved the way it looked. 
 
 ![](/images/demo.gif)
@@ -22,3 +20,61 @@ The previous site I mentioned earlier that I had made was made with simple React
 It's no longer hosted (I had my AWS account compromised and I just never bothered to host it back up 😬) but you can find the repo [here](https://github.com/daee-kang/TIL). 
 
 I kept hearing about **JAMstack** and **next.js** and there's like a million JavaScript technologies out there so I never really paid attention to it. I was working and I just stumbled on a medium article about JAMstack and halfway in I kinda just had to say *okay yeah this kinda sick.*
+
+# The stack
+- Next.js
+- and that's about it LOL
+
+That's the great thing I found about JAMstack, it was made to be easy at least in my experience. You have a superset of React and you create a website with a few principles in mind and you connect it to netlify in a few clicks.
+
+# CMS
+One of the big differences between this site and my previous site, is the way content management is handled. 
+
+In my old site, anyone could change and edit data. This leads to a whole lot of problems. Since I had an actual backend server and database, anyone could have created a bot and submit changes and wreck me in usage costs but luckily or maybe not luckily no one ever really visited my site but me. 
+
+For this site, there is no database. It's part of the JAMstack ideology. You cut out the web server and the app server therefore there is no database. So it works like this, we have our files "locally", each page including this one is just a markdown file (I use .mdx here, mdx files allow me to include JSX code for custom views). When Next.js compiles it all together, it grabs the mdx files and generates the html files for us and then serves it all together, thus creating an BLAZIN fast website. **Next.js is perfect for sites like this**.
+
+With that said, how do we actually create posts? Next.js and netlify work together almost as if they were made for each other. Netlify has built in CI so whenever I create a commit, netlify will recompile and serve within minutes. I don't want to go in and manually create markdown files in source either, so netlify has it's own built in plugin called netlify CMS built specifically for next.js. 
+
+Really all I had to add was this: 
+```html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Manager</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <!-- Include the script that builds the page and powers Netlify CMS -->
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script>
+      CMS.registerPreviewStyle(
+        "https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap"
+      );
+      CMS.registerPreviewStyle("/styles/content.module.css");
+      var PostPreview = createClass({
+        render: function () {
+          var entry = this.props.entry;
+          var date = entry.getIn(["data", "date"]);
+          return h(
+            "div",
+            { className: "content" },
+            h("h1", {}, entry.getIn(["data", "title"])),
+            h("time", {}, entry.getIn(["data", "date"])),
+            h("div", {}, this.props.widgetFor("body"))
+          );
+        },
+      });
+      CMS.registerPreviewTemplate("posts", PostPreview);
+    </script>
+  </body>
+</html>
+```
+It was that simple :-0
+
+
+
+
