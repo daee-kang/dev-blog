@@ -1,0 +1,30 @@
+---
+slug: advanced hooks
+title: Intermediate React Hooks
+date: 2021-10-14
+author: daee
+tags:
+  - react
+---
+# `useRef`
+`useRef` can be used in two ways. Before, it would be used to 'hold onto' an DOM element on the component that you would then be able to manipulate within. We can do this by:
+1. Define the reference to access the element `const elementRef = useRef()`
+2. Assign the reference to `ref` attribute of the element: `<div ref={elementRef}> </div>`
+3. After mounting, `elementRef.current` points to the DOM element
+
+```js
+import { useRef, useEffect } from 'react';
+function AccessingElement() {
+  const elementRef = useRef();
+   useEffect(() => {
+    const divElement = elementRef.current;
+    console.log(divElement); // logs <div>I'm an element</div>
+  }, []);
+  return (
+    <div ref={elementRef}>
+      I'm an element
+    </div>
+  );
+}
+```
+
