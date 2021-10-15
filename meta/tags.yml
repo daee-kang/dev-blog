@@ -3,3 +3,7 @@ tags:
     name: next.js
   - slug: jamstack
     name: jamstack
+  - slug: react
+    name: React
+  - slug: react native
+    name: React Native
