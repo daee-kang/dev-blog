@@ -1,5 +1,5 @@
 ---
-slug: advanced hooks
+slug: intermediate-hooks
 title: Intermediate React Hooks
 date: 2021-10-14
 author: daee
@@ -7,7 +7,9 @@ tags:
   - react
 ---
 # `useRef`
+
 `useRef` can be used in two ways. Before, it would be used to 'hold onto' an DOM element on the component that you would then be able to manipulate within. We can do this by:
+
 1. Define the reference to access the element `const elementRef = useRef()`
 2. Assign the reference to `ref` attribute of the element: `<div ref={elementRef}> </div>`
 3. After mounting, `elementRef.current` points to the DOM element
@@ -28,3 +30,11 @@ function AccessingElement() {
 }
 ```
 
+There is a more modern approach to using useRef now and it can be more powerful. We can use `useRef` to hold a reference to the object. So when we call `useRef({'lol': 'hey'})`, it won't actually create a copy for you, it will hold onto that original objects identity. 
+
+This becomes very useful when we want to hold onto the value outside of the lifecycle methods whereas `useState` wouldn't. 
+
+There are also two important differences between state and ref as well:
+
+1. Updating a reference doesn't trigger a re-render. 
+2. Reference update is synchronous (meaning the value is available right away) while state is async. In react, the updated state variable is available *after* the component is re-rendered.
